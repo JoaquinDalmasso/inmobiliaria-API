@@ -5,7 +5,6 @@ import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js'
 import cookieParser from 'cookie-parser';
 import listingRouter from './routes/listing.route.js' 
-import cors from 'cors';
 
 dotenv.config();
 
@@ -19,13 +18,13 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser())
-//app.use(cors())
 
 const port = parseInt(process.env.PORT) || 3000;
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });
 
+app.use(express.static('dist'))
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
